@@ -124,11 +124,23 @@
       el.shiftOptions.appendChild(labelEl);
     });
     el.dayModal.hidden = false;
+    el.dayModal.classList.remove('is-closing');
+    el.dayModal.classList.add('is-open');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        el.dayModal.classList.add('is-visible');
+      });
+    });
   }
 
   function closeDayModal() {
-    el.dayModal.hidden = true;
-    modalDay = null;
+    el.dayModal.classList.remove('is-visible');
+    el.dayModal.classList.add('is-closing');
+    setTimeout(function () {
+      el.dayModal.hidden = true;
+      el.dayModal.classList.remove('is-open', 'is-closing');
+      modalDay = null;
+    }, 280);
   }
 
   el.modalClose.addEventListener('click', closeDayModal);
@@ -170,9 +182,15 @@
     }
 
     el.daysGrid.innerHTML = '';
-    cells.forEach(function (cell) {
+    el.daysGrid.classList.remove('is-ready');
+    requestAnimationFrame(function () {
+      el.daysGrid.classList.add('is-ready');
+    });
+    cells.forEach(function (cell, index) {
       const div = document.createElement('div');
       div.className = 'day-cell';
+      div.dataset.index = index;
+      div.style.setProperty('--i', index);
       if (cell.empty) {
         div.classList.add('empty');
         div.textContent = '';
@@ -221,13 +239,23 @@
   }
 
   function goPrevMonth() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
+    var grid = el.daysGrid;
+    grid.classList.add('month-prev');
+    setTimeout(function () {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+      grid.classList.remove('month-prev');
+    }, 180);
   }
 
   function goNextMonth() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
+    var grid = el.daysGrid;
+    grid.classList.add('month-next');
+    setTimeout(function () {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+      grid.classList.remove('month-next');
+    }, 180);
   }
 
   function exportToExcel() {
