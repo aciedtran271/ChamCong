@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" />
+  <meta name="theme-color" content="#0f1419" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Chấm công" />
+  <title>Chấm công - Ghi nhận ngày làm việc</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>Chấm công</h1>
+      <p class="subtitle">Ghi nhận ngày làm việc theo lịch hàng tháng</p>
+    </header>
+
+    <main class="main">
+      <section class="controls">
+        <div class="month-nav">
+          <button type="button" class="btn btn-icon" id="prevMonth" aria-label="Tháng trước">←</button>
+          <h2 id="currentMonthLabel">Tháng 1 / 2025</h2>
+          <button type="button" class="btn btn-icon" id="nextMonth" aria-label="Tháng sau">→</button>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="exportExcel">
+            Xuất file Excel
+          </button>
+        </div>
+      </section>
+
+      <section class="calendar-section">
+        <div class="calendar" id="calendar">
+          <div class="weekdays">
+            <span>CN</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span>
+          </div>
+          <div class="days" id="daysGrid"></div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="dot working"></span> Có làm (1 hoặc nhiều ca)</span>
+          <span class="legend-item"><span class="dot"></span> Không làm</span>
+        </div>
+      </section>
+
+      <div class="modal-overlay" id="dayModal" hidden>
+        <div class="modal">
+          <h3 id="modalTitle">Chọn ca làm việc — Ngày 1</h3>
+          <div class="shift-options" id="shiftOptions"></div>
+          <button type="button" class="btn btn-primary modal-close" id="modalClose">Xong</button>
+        </div>
+      </div>
+
+      <section class="summary" id="summary">
+        <h3>Tổng kết tháng</h3>
+        <p id="workingDaysCount">Số ngày có làm: <strong>0</strong></p>
+        <p id="totalShiftsCount">Tổng số ca: <strong>0</strong></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Dữ liệu được lưu trên trình duyệt. Xuất Excel để lưu trữ lâu dài.
+    </footer>
+  </div>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

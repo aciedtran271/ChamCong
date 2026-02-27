@@ -1,0 +1,19 @@
+{
+  "name": "Chấm công",
+  "short_name": "Chấm công",
+  "description": "Ghi nhận ngày làm việc theo lịch hàng tháng, xuất Excel",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1419",
+  "theme_color": "#0f1419",
+  "lang": "vi",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
